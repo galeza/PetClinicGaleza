@@ -25,7 +25,7 @@ import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.property.*;
 
-public class BrowserDriver implements SetupDriver{
+public class BrowserDriver implements SetupDriverInterface{
 
 	private WebDriver driver;
 	//private JavascriptExecutor jsExecutor;

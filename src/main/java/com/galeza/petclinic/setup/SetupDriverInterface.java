@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-public interface SetupDriver extends WebDriver, TakesScreenshot{
+public interface SetupDriverInterface extends WebDriver, TakesScreenshot{
 
 	WebElement findClickableElement(By locator);
 	WebElement findVisibleElement(By locator);
