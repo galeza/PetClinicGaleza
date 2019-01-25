@@ -1,4 +1,4 @@
-package com.galeza.petclinic.basepage;
+package com.galeza.petclinic.pageobjects.base;
 
 
 public interface BasePageInterface {

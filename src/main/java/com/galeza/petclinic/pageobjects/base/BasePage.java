@@ -1,6 +1,7 @@
-package com.galeza.petclinic.basepage;
+package com.galeza.petclinic.pageobjects.base;
 
 import org.openqa.selenium.WebDriver;
+
 import com.galeza.petclinic.setup.BrowserDriver;
 
 public class BasePage implements BasePageInterface {

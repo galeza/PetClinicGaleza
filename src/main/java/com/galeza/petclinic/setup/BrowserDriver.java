@@ -6,6 +6,8 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentI
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 
@@ -24,6 +26,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.property.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserDriver implements SetupDriverInterface{
 
@@ -48,6 +52,7 @@ public class BrowserDriver implements SetupDriverInterface{
 	}
 	
 	private void createChromeDriver(){
+		WebDriverManager.chromedriver().setup();
 		try{
 			driver = new ChromeDriver();
 		}catch(Exception ex){
@@ -208,6 +213,15 @@ public class BrowserDriver implements SetupDriverInterface{
 			throw new SetupException(text + " is not included in " + element.toString());		
 		}
 		
+	}
+	
+	@Override
+	public String toString() {
+		return browser;
+	}
+	
+	public WebDriver getDriver() {
+		return driver;
 	}
 
 }

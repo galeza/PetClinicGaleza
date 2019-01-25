@@ -4,9 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 import java.util.Properties;
-
-import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.setup.SetupException;
 
 public class Property {
@@ -20,7 +19,14 @@ public class Property {
 	}
 
 	private void validateFileExists() {
-		File propertyFile = new File(EnvValues.PROPERTY_FILE);
+		File propertyFile = null;
+		try {
+			propertyFile = new File(this.getClass().getResource( "/project.properties" ).toURI());
+		} catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+//		TODO
 		if (!propertyFile.exists())
 			throw new SetupException("property file does not exist");		
 	}
@@ -28,7 +34,12 @@ public class Property {
 	private void loadPropertyContent() {
 		
 		properties = new Properties();
-		File file = new File(EnvValues.PROPERTY_FILE);
+		File file = null;
+		try {
+			file = new File(this.getClass().getResource( "/project.properties" ).toURI());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
 		InputStream input;
 		
 		try {
