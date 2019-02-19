@@ -11,6 +11,7 @@ public class EnvValues {
 	public static final String CANNOT_CLEAN_FOLDER_ERROR = "cannot clean screenshot folder";
 	public static final String CANNOT_CAPTURE_SCREENSHOT_ERROR = "cannot capture the screenshot";
 	public static final String WEB_URL = "webUrl";
+	public static final String WEB_TITLE = "webTitle";
 	public static final String EXPECTED_URL = "expectedUrl";
 	public static final String HOME_PAGE_ERROR = "Home page is not displayed";
 }

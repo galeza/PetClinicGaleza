@@ -15,7 +15,7 @@ public interface SetupDriverInterface extends WebDriver, TakesScreenshot{
 	Boolean titleContains(String title);
 	Boolean urlIs(String url);
 	Boolean urlContains(String url);
-//	void executeJS(String jsCommand);
+	void executeJS(String jsCommand);
 	void waitUntilVisible(WebElement element);
 	void waitUntilElementIncludesValue(WebElement element, String text);
 	

@@ -23,7 +23,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.galeza.petclinic.base.BaseTest;
+//import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.property.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -32,10 +32,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 public class BrowserDriver implements SetupDriverInterface{
 
 	private WebDriver driver;
-	//private JavascriptExecutor jsExecutor;
+	private JavascriptExecutor jsExecutor;
 	private WebDriverWait wait;
 	private String browser;
-	private final String chromeDriverPath = new Property().get(EnvValues.CHROME_DRIVER_PATH);
 	
 
 	
@@ -43,6 +42,7 @@ public class BrowserDriver implements SetupDriverInterface{
 		browser = browserName;
 		createDriver(browserName);
 		wait = new WebDriverWait(driver, 60);
+		jsExecutor = (JavascriptExecutor) driver;
 	}
 
 	private void createDriver(String browser){
@@ -155,7 +155,7 @@ public class BrowserDriver implements SetupDriverInterface{
 			return wait.until(ExpectedConditions.titleIs(title));
 		}
 		catch(Exception e){
-			BaseTest.LOG.fatal("titleIs exception");
+//			BaseTest.LOG.fatal("titleIs exception");
 			return false;
 		}
 	}
@@ -166,7 +166,7 @@ public class BrowserDriver implements SetupDriverInterface{
 			return wait.until(ExpectedConditions.titleContains(title));
 		}
 		catch(Exception e){
-			BaseTest.LOG.fatal("titleContains exception");
+//			BaseTest.LOG.fatal("titleContains exception");
 			return false;
 		}
 	}
@@ -177,7 +177,7 @@ public class BrowserDriver implements SetupDriverInterface{
 			return wait.until(ExpectedConditions.urlToBe(url));
 		}
 		catch(Exception e){
-			BaseTest.LOG.fatal("urlIs exception");
+//			BaseTest.LOG.fatal("urlIs exception");
 			return false;
 		}
 	}
@@ -188,7 +188,7 @@ public class BrowserDriver implements SetupDriverInterface{
 			return wait.until(ExpectedConditions.urlContains(url));
 		}
 		catch(Exception e){
-			BaseTest.LOG.fatal("urlContains exception");
+//			BaseTest.LOG.fatal("urlContains exception");
 			return false;
 		}
 	}
@@ -222,6 +222,19 @@ public class BrowserDriver implements SetupDriverInterface{
 	
 	public WebDriver getDriver() {
 		return driver;
+	}
+
+	@Override
+	public void executeJS(String jsCommand) {
+		try {
+			jsExecutor.executeScript(jsCommand);
+		}
+		catch (Exception ex) {
+			//TODO
+			System.out.println("jsException");
+			//log.fatal(ex.getMessage());		
+		}
+		
 	}
 
 }
