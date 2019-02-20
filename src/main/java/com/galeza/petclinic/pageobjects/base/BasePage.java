@@ -42,6 +42,7 @@ public class BasePage implements BasePageInterface {
 	}
 
 	public FindOwners goToFindOwners(){
+		System.out.println("goToFindOwners method");
 		findOwnersNavLink.click();
 		return new FindOwners(driver);
 	}

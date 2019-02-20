@@ -7,6 +7,7 @@ import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import com.galeza.petclinic.property.*;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.pageobjects.base.BasePage;
+import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 
 public class Home extends BasePage{
 	
@@ -23,7 +24,12 @@ public class Home extends BasePage{
 		getDriver().get(siteUrl);
 		if (!urlContains(property.get(EnvValues.EXPECTED_URL)) || !titleContains(siteTitle))
 			throw new HtmlElementsException(EnvValues.HOME_PAGE_ERROR);
-		goToFindOwners();
 		return this;
 	}	
+
+	public FindOwners findOwners(){
+		goToFindOwners();
+		return new FindOwners(driver);
+	}
+
 }
