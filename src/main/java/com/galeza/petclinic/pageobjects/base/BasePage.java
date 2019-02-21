@@ -17,36 +17,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.galeza.petclinic.htmlelements.Navigation;
 import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 import com.galeza.petclinic.setup.BrowserDriver;
 
 public class BasePage implements BasePageInterface {
 
 	protected WebDriver driver;
-	//public static final long POLLING_INTERVAL = 250;
 	public static final int TIME_OUT = 5;
 	private WebDriverWait wait;
 
-	// @FindBy(xpath = "//a[@href='/owners/find]")
-	@FindBy(css = "div[class='navbar'] a[href*='/owners/find.html']")
-	private WebElement findOwnersNavLink;
+
 
 	public BasePage(WebDriver driver) {
 		super();
 		this.driver = driver;
-		wait = new WebDriverWait(driver, TIME_OUT);
+		this.wait = new WebDriverWait(driver, TIME_OUT);
 	}
 
 	public WebDriver getDriver() {
 		return driver;
 	}
 
-	public FindOwners goToFindOwners(){
-		System.out.println("goToFindOwners method");
-		findOwnersNavLink.click();
-		return new FindOwners(driver);
-	}
-	
 	@Override
 	public boolean urlContains(String url) {
 		try {
