@@ -13,6 +13,6 @@ public class EnvValues {
 	public static final String WEB_URL = "webUrl";
 	public static final String WEB_TITLE = "webTitle";
 	public static final String EXPECTED_URL = "expectedUrl";
-	public static final String HOME_PAGE_ERROR = "Home page is not displayed";
+	public static final String PAGE_ERROR = " page is not displayed";
 	public static final String FINDOWNERS_EXPECTED_URL = "findOwnersExpectedUrl";
 }

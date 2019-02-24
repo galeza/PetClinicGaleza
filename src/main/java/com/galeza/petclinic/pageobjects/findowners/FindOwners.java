@@ -1,10 +1,6 @@
 package com.galeza.petclinic.pageobjects.findowners;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.SearchOwner;
 import com.galeza.petclinic.pageobjects.base.BasePage;
@@ -23,7 +19,7 @@ public class FindOwners extends BasePage{
 		super(driver);
 		HtmlElementLoader.populatePageObject(this, driver);
 		if (!urlContains(property.get(EnvValues.FINDOWNERS_EXPECTED_URL)))
-			throw new HtmlElementsException(EnvValues.HOME_PAGE_ERROR);
+			throw new HtmlElementsException("FIND OWNERS" + EnvValues.PAGE_ERROR);
 	}
 	
 	public Owners showAllOwners(){

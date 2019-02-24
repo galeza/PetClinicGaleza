@@ -25,7 +25,7 @@ public class Home extends BasePage{
 		String siteTitle = property.get(EnvValues.WEB_TITLE);
 		getDriver().get(siteUrl);
 		if (!urlContains(property.get(EnvValues.EXPECTED_URL)) || !titleContains(siteTitle))
-			throw new HtmlElementsException(EnvValues.HOME_PAGE_ERROR);
+			throw new HtmlElementsException("HOME" + EnvValues.PAGE_ERROR);
 		return this;
 	}	
 
