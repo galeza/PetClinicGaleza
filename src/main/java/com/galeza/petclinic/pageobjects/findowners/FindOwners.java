@@ -8,6 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.SearchOwner;
 import com.galeza.petclinic.pageobjects.base.BasePage;
+import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.property.Property;
 
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
@@ -25,8 +26,9 @@ public class FindOwners extends BasePage{
 			throw new HtmlElementsException(EnvValues.HOME_PAGE_ERROR);
 	}
 	
-	public void searchOwners(){
+	public Owners showAllOwners(){
 		search.searchOwner();
+		return new Owners(driver);
 
 	}
 }

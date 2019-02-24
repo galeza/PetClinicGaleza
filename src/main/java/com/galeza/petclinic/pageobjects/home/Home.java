@@ -29,7 +29,7 @@ public class Home extends BasePage{
 		return this;
 	}	
 
-	public FindOwners findOwners(){
+	public FindOwners goToFindOwners(){
 		nav.clickFindOwnersLink();
 		return new FindOwners(driver);
 	}

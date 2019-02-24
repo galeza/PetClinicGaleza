@@ -6,6 +6,7 @@ import com.galeza.petclinic.testlistener.TestListener;
 import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 import com.galeza.petclinic.pageobjects.home.Home;
+import com.galeza.petclinic.pageobjects.owners.Owners;
 
 
 //@Listeners(TestListener.class)
@@ -15,9 +16,10 @@ public class PetClinicTest extends BaseTest{
 	public void modifyOwnerTest(){
 		LOG.info("Hej");
 		Home homePage = new Home(driver);
-		homePage.open();
-		FindOwners findOwners = homePage.findOwners();
-		findOwners.searchOwners();
+		//homePage.open();
+//		FindOwners findOwners = homePage.findOwners();
+//		Owners owners = findOwners.searchOwners();
+		Owners owners = homePage.open().goToFindOwners().showAllOwners();
 		
 	}
 	
