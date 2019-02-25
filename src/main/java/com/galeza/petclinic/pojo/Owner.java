@@ -7,7 +7,8 @@ import lombok.Setter;
 @Getter
 public class Owner {
 
-	private String name;
+	private String firstName;
+	private String lastName;
 	private String address;
 	private String city;
 	private String telephone;
