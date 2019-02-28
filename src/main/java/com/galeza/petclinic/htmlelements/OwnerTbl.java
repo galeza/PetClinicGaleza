@@ -19,14 +19,17 @@ public class OwnerTbl extends HtmlElement{
 	@FindBy(css = "a.btn.btn-info")
 	private HtmlElement editOwnerNavLink;
 	
-	public Owner readSpecificOwnerData(String ownerName){
+	public Owner readSpecificOwnerData(){
 		Owner owner = new Owner();
-		String name[] = ownerName.split(" ");
-		owner.setFirstName(name[0]);
-		owner.setLastName(name[1]);
 		List<WebElement> ownerRows = this.findElements(By.tagName("tr"));
 		 for(int i=0; i<ownerRows.size(); i++) {
 			 List<WebElement> row = ownerRows.get(i).findElements(By.tagName("td"));
+			 	if(i == 0){
+			 		System.out.println("here I am " + row.get(0).getText());
+					String name[] = row.get(0).getText().split(" ");
+					owner.setFirstName(name[0]);
+					owner.setLastName(name[1]);
+			 	}
 		        if(i ==1){
 		        	owner.setAddress(row.get(0).getText());
 		        }

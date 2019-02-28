@@ -19,6 +19,7 @@ public class OwnersTbl extends HtmlElement{
 		        if(!row.isEmpty() && row.get(0).getText().endsWith(ownerName)){
 		        	row.get(0).click();
 		        	break;
+		        	//TODO exception name not found
 		        }
 
 		 }

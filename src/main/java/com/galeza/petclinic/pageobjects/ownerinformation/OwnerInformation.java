@@ -23,11 +23,11 @@ public class OwnerInformation extends BasePage{
 			throw new HtmlElementsException("OWNER INFORMATION" + EnvValues.PAGE_ERROR);
 	}
 
-	public Owner readInformationAboutOwner(String ownerName){
-		return ownertbl.readSpecificOwnerData(ownerName);
+	public Owner readInformationAboutOwner(){
+		return ownertbl.readSpecificOwnerData();
 	}
 
-	public NewOwner openOwnerEditPage(){
+	public NewOwner openNewOwnerPage(){
 		ownertbl.clickOnEditOwner();
 		return new NewOwner(driver);
 	}

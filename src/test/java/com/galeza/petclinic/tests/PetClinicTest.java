@@ -1,5 +1,6 @@
 package com.galeza.petclinic.tests;
 
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.galeza.petclinic.testlistener.TestListener;
@@ -14,18 +15,39 @@ import com.galeza.petclinic.pojo.Owner;
 //@Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
 
-	@Test()
-	public void modifyOwnerTest() {
-		Owner owner = null;
-		LOG.info("Hej");
-		Home homePage = new Home(driver);
-		OwnerInformation ownerInfo = homePage.open().goToFindOwners().showAllOwners().goToOwner("Jean Coleman");
-		owner = ownerInfo.readInformationAboutOwner("Jean Coleman");
-		System.out.println(owner.getFirstName() + " " + owner.getLastName());
-		System.out.println(owner.getAddress());
-		System.out.println(owner.getCity());
-		System.out.println(owner.getTelephone());
-		NewOwner newOwner = ownerInfo.openOwnerEditPage();
+	@DataProvider(name = "ownerInformation")
+
+	public static Object[][] ownerInformation() {
+
+		return new Object[][] {
+				{ "Jean", "Coleman", "ModifiedJean", "ModifiedColeman", "Kijowska", "Krakow", "123456789" }, };
+
 	}
 
+	@Test(dataProvider = "ownerInformation")
+	public void modifyOwnerTest(String firstName, String lastName, String modifiedFirstName, String modifiedLastName,
+			String address, String city, String telephone) {
+		// Owner owner = null;
+		Home homePage = new Home(driver);
+		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showAllOwners()
+				.goToOwner(firstName + " " + lastName);
+		Owner owner = ownerInfoPage.readInformationAboutOwner();
+		// assert first last name czy zostały dobrze przeczytane
+		NewOwner newOwnerPage = ownerInfoPage.openNewOwnerPage();
+		Owner modifiedOwner = setOwnerInformation(modifiedFirstName, modifiedLastName, address, city, telephone);
+		newOwnerPage.updateOwnerInformation(modifiedOwner);
+		ownerInfoPage = newOwnerPage.updateOwner();
+
+	}
+
+	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,
+			String telephone) {
+		Owner owner = new Owner();
+		owner.setFirstName(firstName);
+		owner.setLastName(lastName);
+		owner.setAddress(address);
+		owner.setCity(city);
+		owner.setTelephone(telephone);
+		return owner;
+	}
 }
