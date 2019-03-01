@@ -11,6 +11,7 @@ import com.galeza.petclinic.pageobjects.newowner.NewOwner;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
 import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.pojo.Owner;
+import static org.assertj.core.api.Assertions.*;
 
 //@Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
@@ -27,17 +28,18 @@ public class PetClinicTest extends BaseTest {
 	@Test(dataProvider = "ownerInformation")
 	public void modifyOwnerTest(String firstName, String lastName, String modifiedFirstName, String modifiedLastName,
 			String address, String city, String telephone) {
-		// Owner owner = null;
 		Home homePage = new Home(driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showAllOwners()
 				.goToOwner(firstName + " " + lastName);
-		Owner owner = ownerInfoPage.readInformationAboutOwner();
-		// assert first last name czy zostały dobrze przeczytane
+		Owner existingOwner = ownerInfoPage.readInformationAboutOwner();
+		assertThat(existingOwner.getFirstName()).isEqualToIgnoringCase(firstName);
+		assertThat(existingOwner.getLastName()).isEqualToIgnoringCase(lastName);
 		NewOwner newOwnerPage = ownerInfoPage.openNewOwnerPage();
 		Owner modifiedOwner = setOwnerInformation(modifiedFirstName, modifiedLastName, address, city, telephone);
 		newOwnerPage.updateOwnerInformation(modifiedOwner);
 		ownerInfoPage = newOwnerPage.updateOwner();
-
+		Owner readModifiedOwner = ownerInfoPage.readInformationAboutOwner();
+		assertThat(readModifiedOwner).isEqualToComparingFieldByField(modifiedOwner);
 	}
 
 	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,

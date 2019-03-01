@@ -25,7 +25,6 @@ public class OwnerTbl extends HtmlElement{
 		 for(int i=0; i<ownerRows.size(); i++) {
 			 List<WebElement> row = ownerRows.get(i).findElements(By.tagName("td"));
 			 	if(i == 0){
-			 		System.out.println("here I am " + row.get(0).getText());
 					String name[] = row.get(0).getText().split(" ");
 					owner.setFirstName(name[0]);
 					owner.setLastName(name[1]);
