@@ -1,5 +1,7 @@
 package com.galeza.petclinic.htmlelements;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
@@ -11,14 +13,33 @@ public class SearchOwner extends HtmlElement{
 
 	
 	@Name("SEARCH OWNERS INPUT")	
-	@FindBy(id = "lastName")
+	@FindBy(css = "div[class='control-group'] input[type='text']")
 	private HtmlElement searchOwnerNameInput;
 	
 	@Name("SEARCH OWNERS BUTTON")
 	@FindBy(css = "div.form-actions button")
 	private HtmlElement searchOwnerButton;
 	
-	public void searchOwner(){
+	public void searchOwners(){
+		searchOwnerButton.click();
+	}
+	
+	public void searchSpecficOwner(String lastName, WebDriver driver){
+//		System.out.println(" last name = " + lastName);
+//		Actions actions = new Actions(driver);
+//		actions.moveToElement(searchOwnerNameInput).click();
+//		//actions.click();
+//		actions.sendKeys(lastName).perform();;
+//		//actions.build().perform();
+		searchOwnerNameInput.click();
+		searchOwnerNameInput.clear();
+		searchOwnerNameInput.sendKeys(lastName);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		searchOwnerButton.click();
 	}
 }
