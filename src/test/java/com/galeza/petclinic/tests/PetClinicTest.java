@@ -41,40 +41,18 @@ public class PetClinicTest extends BaseTest {
 //		Owner readModifiedOwner = ownerInfoPage.readInformationAboutOwner();
 //		assertThat(readModifiedOwner).isEqualToComparingFieldByField(modifiedOwner);
 //	}
-
-	@DataProvider(name = "findSpecificOwner")
-
-	public static Object[][] findSpecificOwner() {
-
-		return new Object[][] {
-				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765" }, };
-
-	}
-
-	@Test(dataProvider = "findSpecificOwner")
-	public void showSpecificOwnerTest(String firstName, String lastName,
-			String address, String city, String telephone) {
-		Home homePage = new Home(driver);
-		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
-		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
-		assertThat(foundOwner.getFirstName()).isEqualToIgnoringCase(firstName);
-		assertThat(foundOwner.getLastName()).isEqualToIgnoringCase(lastName);
-		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
-		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
-		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
-	}
-
-//	@DataProvider(name = "ownerAndPet")
 //
-//	public static Object[][] ownerAndPet() {
+//	@DataProvider(name = "findSpecificOwner")
+//
+//	public static Object[][] findSpecificOwner() {
 //
 //		return new Object[][] {
 //				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765" }, };
 //
 //	}
 //
-//	@Test(dataProvider = "ownerAndPet")
-//	public void AddPetTest(String firstName, String lastName,
+//	@Test(dataProvider = "findSpecificOwner")
+//	public void showSpecificOwnerTest(String firstName, String lastName,
 //			String address, String city, String telephone) {
 //		Home homePage = new Home(driver);
 //		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
@@ -85,6 +63,28 @@ public class PetClinicTest extends BaseTest {
 //		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
 //		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
 //	}
+
+	@DataProvider(name = "ownerAndPet")
+
+	public static Object[][] ownerAndPet() {
+
+		return new Object[][] {
+				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765" }, };
+
+	}
+
+	@Test(dataProvider = "ownerAndPet")
+	public void AddPetTest(String firstName, String lastName,
+			String address, String city, String telephone) {
+		Home homePage = new Home(driver);
+		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
+		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
+		assertThat(foundOwner.getFirstName()).isEqualToIgnoringCase(firstName);
+		assertThat(foundOwner.getLastName()).isEqualToIgnoringCase(lastName);
+		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
+		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
+		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
+	}
 	
 	
 	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,

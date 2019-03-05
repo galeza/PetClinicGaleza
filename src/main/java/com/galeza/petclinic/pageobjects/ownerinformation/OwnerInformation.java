@@ -31,5 +31,10 @@ public class OwnerInformation extends BasePage{
 		ownertbl.clickOnEditOwner();
 		return new NewOwner(driver);
 	}
+
+	public NewOwner openNewPetPage(){
+		ownertbl.clickAddNewPet();
+		return new NewOwner(driver);
+	}
 	
 }
