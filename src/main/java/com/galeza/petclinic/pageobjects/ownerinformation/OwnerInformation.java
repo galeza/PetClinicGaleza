@@ -5,6 +5,7 @@ import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.OwnerTbl;
 import com.galeza.petclinic.pageobjects.base.BasePage;
 import com.galeza.petclinic.pageobjects.newowner.NewOwner;
+import com.galeza.petclinic.pageobjects.newpet.NewPet;
 import com.galeza.petclinic.pojo.Owner;
 
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
@@ -32,9 +33,9 @@ public class OwnerInformation extends BasePage{
 		return new NewOwner(driver);
 	}
 
-	public NewOwner openNewPetPage(){
+	public NewPet openNewPetPage(){
 		ownertbl.clickAddNewPet();
-		return new NewOwner(driver);
+		return new NewPet(driver);
 	}
 	
 }

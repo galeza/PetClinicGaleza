@@ -8,6 +8,7 @@ import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 import com.galeza.petclinic.pageobjects.home.Home;
 import com.galeza.petclinic.pageobjects.newowner.NewOwner;
+import com.galeza.petclinic.pageobjects.newpet.NewPet;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
 import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.pojo.Owner;
@@ -64,16 +65,16 @@ public class PetClinicTest extends BaseTest {
 //		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
 //	}
 
-	@DataProvider(name = "ownerAndPet")
+	@DataProvider(name = "ownerAddPet")
 
-	public static Object[][] ownerAndPet() {
+	public static Object[][] ownerAddPet() {
 
 		return new Object[][] {
 				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765" }, };
 
 	}
 
-	@Test(dataProvider = "ownerAndPet")
+	@Test(dataProvider = "ownerAddPet")
 	public void AddPetTest(String firstName, String lastName,
 			String address, String city, String telephone) {
 		Home homePage = new Home(driver);
@@ -84,6 +85,7 @@ public class PetClinicTest extends BaseTest {
 		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
 		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
 		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
+		NewPet newPetPage = ownerInfoPage.openNewPetPage();
 	}
 	
 	
