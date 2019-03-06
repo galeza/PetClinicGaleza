@@ -20,8 +20,7 @@ public class OwnerTbl extends HtmlElement{
 	private HtmlElement editOwnerNavLink;
 
 	@Name("ADD NEW PET")
-	@FindBy(css = "div[class='btn btn-success'] a[href*='/new.html']")
-	//@FindBy(css = "a.btn.btn-success")
+	@FindBy(css = "a.btn.btn-success")
 	private HtmlElement addNewPetNavLink;
 	
 	public Owner readSpecificOwnerData(){

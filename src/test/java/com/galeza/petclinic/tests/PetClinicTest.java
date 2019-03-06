@@ -85,7 +85,7 @@ public class PetClinicTest extends BaseTest {
 		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
 		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
 		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
-		NewPet newPetPage = ownerInfoPage.openNewPetPage();
+		ownerInfoPage.openNewPetPage().addNewPet("Danny", "6");;
 	}
 	
 	
