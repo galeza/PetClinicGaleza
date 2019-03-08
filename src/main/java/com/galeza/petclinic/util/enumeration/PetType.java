@@ -1,5 +1,6 @@
 package com.galeza.petclinic.util.enumeration;
 
+import java.util.Random;
 
 public enum PetType {
 
@@ -11,5 +12,9 @@ public enum PetType {
 	SNAKE;
 	
 
+    public static PetType getRandomPetType() {
+        Random random = new Random();
+        return values()[random.nextInt(values().length)];
+    }
 
 }

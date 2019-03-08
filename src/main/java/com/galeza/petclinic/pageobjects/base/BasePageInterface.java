@@ -1,5 +1,8 @@
 package com.galeza.petclinic.pageobjects.base;
 
+import java.util.List;
+
+import org.openqa.selenium.WebElement;
 
 public interface BasePageInterface {
 
@@ -10,5 +13,6 @@ public interface BasePageInterface {
 	String getTitle();
 	String getUrl();
 	void reload();
+	void clickOnCellInTable(List<WebElement> rows, String value);
 	
 }

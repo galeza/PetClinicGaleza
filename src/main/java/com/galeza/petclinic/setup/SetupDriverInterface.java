@@ -1,5 +1,7 @@
 package com.galeza.petclinic.setup;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;

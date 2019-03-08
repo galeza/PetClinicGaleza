@@ -4,6 +4,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.galeza.petclinic.testlistener.TestListener;
+import com.galeza.petclinic.util.enumeration.PetType;
 import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 import com.galeza.petclinic.pageobjects.home.Home;
@@ -12,7 +13,13 @@ import com.galeza.petclinic.pageobjects.newpet.NewPet;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
 import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.pojo.Owner;
+import com.galeza.petclinic.pojo.Pet;
+import com.galeza.petclinic.setup.BrowserDriver;
+
 import static org.assertj.core.api.Assertions.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 //@Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
@@ -70,14 +77,14 @@ public class PetClinicTest extends BaseTest {
 	public static Object[][] ownerAddPet() {
 
 		return new Object[][] {
-				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765" }, };
+				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765", "Loulou", getLocatDate(), PetType.getRandomPetType().toString().toLowerCase()}, };
 
 	}
 
 	@Test(dataProvider = "ownerAddPet")
 	public void AddPetTest(String firstName, String lastName,
-			String address, String city, String telephone) {
-		Home homePage = new Home(driver);
+			String address, String city, String telephone, String petName, String petBirthDate, String petType) {
+		Home homePage = new Home((BrowserDriver)driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
 		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
 		assertThat(foundOwner.getFirstName()).isEqualToIgnoringCase(firstName);
@@ -85,10 +92,27 @@ public class PetClinicTest extends BaseTest {
 		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
 		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
 		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
-		ownerInfoPage.openNewPetPage().addNewPet("Danny", "6");;
+		Pet pet = setPetInformation(petName, petBirthDate, petType);
+		System.out.println("pet type is " + pet.getType());
+		String dateParts[] = pet.getBirthDate().split("/");
+		ownerInfoPage.openNewPetPage().addNewPet(pet.getName(), dateParts[2], pet.getType());;
 	}
 	
-	
+
+	public static String getLocatDate(){
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MMMM/d");
+		LocalDate localDate = LocalDate.now();
+		return dtf.format(localDate);
+	}
+
+	private Pet setPetInformation(String name, String birthdate, String type){
+		Pet pet = new Pet();
+		pet.setName(name);
+		pet.setBirthDate(birthdate);
+		pet.setType(type);
+		return pet;
+		
+	}
 	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,
 			String telephone) {
 		Owner owner = new Owner();
