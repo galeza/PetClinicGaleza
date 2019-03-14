@@ -1,11 +1,14 @@
 package com.galeza.petclinic.tests;
 
+import org.assertj.core.api.SoftAssertions;
+import org.omg.CORBA.PERSIST_STORE;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import com.galeza.petclinic.testlistener.TestListener;
 import com.galeza.petclinic.util.enumeration.PetType;
 import com.galeza.petclinic.base.BaseTest;
+import com.galeza.petclinic.helpers.RandomValues;
 import com.galeza.petclinic.pageobjects.findowners.FindOwners;
 import com.galeza.petclinic.pageobjects.home.Home;
 import com.galeza.petclinic.pageobjects.newowner.NewOwner;
@@ -20,6 +23,12 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import javax.lang.model.element.Element;
 
 //@Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
@@ -77,30 +86,35 @@ public class PetClinicTest extends BaseTest {
 	public static Object[][] ownerAddPet() {
 
 		return new Object[][] {
-				{ "Peter", "McTavish", "2387 S. Fair Way", "Madison", "6085552765", "Loulou", getLocatDate(), PetType.getRandomPetType().toString().toLowerCase()}, };
+				{ "Peter", "McTavish", 
+					RandomValues.getRandomAlphaNumericWithSize(5), getLocatDate(), 
+					PetType.getRandomPetType().toString().toLowerCase()}, };
 
 	}
 
 	@Test(dataProvider = "ownerAddPet")
-	public void AddPetTest(String firstName, String lastName,
-			String address, String city, String telephone, String petName, String petBirthDate, String petType) {
+	public void AddPetTest(String firstName, String lastName,String petName, String petBirthDate, String petType) {
 		Home homePage = new Home((BrowserDriver)driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
 		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
 		assertThat(foundOwner.getFirstName()).isEqualToIgnoringCase(firstName);
 		assertThat(foundOwner.getLastName()).isEqualToIgnoringCase(lastName);
-		assertThat(foundOwner.getAddress()).isEqualToIgnoringCase(address);
-		assertThat(foundOwner.getCity()).isEqualToIgnoringCase(city);
-		assertThat(foundOwner.getTelephone()).isEqualToIgnoringCase(telephone);
 		Pet pet = setPetInformation(petName, petBirthDate, petType);
-		System.out.println("pet type is " + pet.getType());
-		String dateParts[] = pet.getBirthDate().split("/");
-		ownerInfoPage.openNewPetPage().addNewPet(pet.getName(), dateParts[2], pet.getType());;
+		String dateParts[] = pet.getBirthDate().split("-");
+		NewPet newPetPage = ownerInfoPage.openNewPetPage();
+		ownerInfoPage = newPetPage.addNewPet(pet.getName(), dateParts[2], pet.getType());
+		Collection<List<String>> petsDetails = ownerInfoPage.readPetDetails();
+		List<String> petDetail = petsDetails.stream().filter(el -> el.contains(pet.getName())).findFirst().get();
+		SoftAssertions softly = new SoftAssertions();
+		softly.assertThat(petDetail.get(0)).as("Pet name").isEqualTo(pet.getName());
+		softly.assertThat(petDetail.get(1)).as("Pet birthdate").isEqualTo(pet.getBirthDate());
+		softly.assertThat(petDetail.get(2)).as("Pet type").isEqualTo(pet.getType());
+		softly.assertAll();
 	}
 	
 
 	public static String getLocatDate(){
-		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MMMM/d");
+		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-d");
 		LocalDate localDate = LocalDate.now();
 		return dtf.format(localDate);
 	}

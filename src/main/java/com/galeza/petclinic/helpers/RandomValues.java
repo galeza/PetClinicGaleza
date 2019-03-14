@@ -5,11 +5,15 @@ import static org.apache.commons.lang3.RandomStringUtils.randomNumeric;
 
 public class RandomValues {
 
-    public String getRandomAlphaNumericWithSize(int sizeOfRandomString) {
+	private RandomValues() {
+		throw new IllegalStateException("Utility class");
+    }
+	  
+    public static String getRandomAlphaNumericWithSize(int sizeOfRandomString) {
         return randomAlphanumeric(sizeOfRandomString).toLowerCase();
     }
     
-    public String getRandomNumericWithSize(int sizeOfRandomString) {
+    public static String getRandomNumericWithSize(int sizeOfRandomString) {
         return randomNumeric(sizeOfRandomString);
     }
 }

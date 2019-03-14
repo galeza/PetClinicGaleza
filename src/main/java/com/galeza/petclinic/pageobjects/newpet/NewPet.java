@@ -8,6 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.PetForm;
 import com.galeza.petclinic.pageobjects.base.BasePage;
+import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
+
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
@@ -23,7 +25,7 @@ public class NewPet extends BasePage{
 			throw new HtmlElementsException("NEW PET " + EnvValues.PAGE_ERROR);
 	}
 	
-	public void addNewPet(String petName, String day, String petType){
+	public OwnerInformation addNewPet(String petName, String day, String petType){
 		petForm.enterName(petName);
 		petForm.enterBirthDate();
 		WebElement monthDatePiker = driver.findElement(By.className("ui-datepicker-month"));
@@ -37,6 +39,7 @@ public class NewPet extends BasePage{
 		Select petTypeSelect = new Select(petTypeElement);
 		petTypeSelect.selectByVisibleText(petType);
 		petForm.addPet();
+		return new OwnerInformation(driver);
 	
 	}
 
