@@ -23,7 +23,7 @@ import com.galeza.petclinic.setup.BrowserDriver;
 
 public class BasePage implements BasePageInterface {
 
-	protected WebDriver driver;
+	protected BrowserDriver driver;
 	public static final int TIME_OUT = 5;
 	private WebDriverWait wait;
 
@@ -31,7 +31,7 @@ public class BasePage implements BasePageInterface {
 
 	public BasePage(WebDriver driver) {
 		super();
-		this.driver = driver;
+		this.driver = (BrowserDriver)driver;
 		this.wait = new WebDriverWait(driver, TIME_OUT);
 	}
 
@@ -89,6 +89,27 @@ public class BasePage implements BasePageInterface {
 	public void reload() {
 		driver.navigate().refresh();
 
+	}
+	
+	@Override
+	public void clickOnCellInTable(List<WebElement> rows, String value){
+		List<WebElement> cells;
+		for(int x = 0; x<rows.size(); x++){
+			cells = rows.get(x).findElements(By.tagName("td"));
+			boolean breakOuterLoop = false;
+			for(int j =0; j<cells.size(); j++){
+				String dayCell = cells.get(j).getText();
+				if(dayCell.equals(value)){
+					cells.get(j).click();
+					breakOuterLoop = true;
+					break;
+				}
+				
+			}
+			if(breakOuterLoop){
+				break;
+			}
+		}
 	}
 ////TODO jak zrobic streama
 //	public boolean waitForPageToLoad() {

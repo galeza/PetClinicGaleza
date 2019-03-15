@@ -18,6 +18,10 @@ public class OwnerTbl extends HtmlElement{
 	@Name("EDIT OWNER BUTTON")
 	@FindBy(css = "a.btn.btn-info")
 	private HtmlElement editOwnerNavLink;
+
+	@Name("ADD NEW PET")
+	@FindBy(css = "a.btn.btn-success")
+	private HtmlElement addNewPetNavLink;
 	
 	public Owner readSpecificOwnerData(){
 		Owner owner = new Owner();
@@ -45,6 +49,10 @@ public class OwnerTbl extends HtmlElement{
 
 	public void clickOnEditOwner(){
 		editOwnerNavLink.click();
+	}
+	
+	public void clickAddNewPet(){
+		addNewPetNavLink.click();
 	}
 	
 }

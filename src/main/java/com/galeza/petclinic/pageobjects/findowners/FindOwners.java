@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.SearchOwner;
 import com.galeza.petclinic.pageobjects.base.BasePage;
+import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
 import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.property.Property;
 
@@ -23,8 +24,20 @@ public class FindOwners extends BasePage{
 	}
 	
 	public Owners showAllOwners(){
-		search.searchOwner();
+		search.searchOwners();
 		return new Owners(driver);
+
+	}
+	
+	public OwnerInformation showSpecificOwner(String lastName){
+		search.searchSpecficOwner(lastName, driver);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return new OwnerInformation(driver);
 
 	}
 }
