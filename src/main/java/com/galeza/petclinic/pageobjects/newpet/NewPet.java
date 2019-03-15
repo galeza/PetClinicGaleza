@@ -9,6 +9,7 @@ import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.PetForm;
 import com.galeza.petclinic.pageobjects.base.BasePage;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
+import com.galeza.petclinic.setup.BrowserDriver;
 
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
@@ -16,6 +17,7 @@ import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 public class NewPet extends BasePage{
 
 	private PetForm petForm;
+	private WebElement existingPetNameErrorMessage;
 	
 	public NewPet(WebDriver driver) {
 		super(driver);
@@ -26,6 +28,19 @@ public class NewPet extends BasePage{
 	}
 	
 	public OwnerInformation addNewPet(String petName, String day, String petType){
+		addPet(petName, day, petType);
+		return new OwnerInformation(driver);
+	
+	}
+
+	public boolean addNewPetWithExistingName(String petName, String day, String petType){
+		addPet(petName, day, petType);
+		existingPetNameErrorMessage = driver.findElement(By.cssSelector("span.help-inline"));
+		return existingPetNameErrorMessage.isDisplayed();
+	
+	}
+	
+   private void addPet(String petName, String day, String petType){
 		petForm.enterName(petName);
 		petForm.enterBirthDate();
 		WebElement monthDatePiker = driver.findElement(By.className("ui-datepicker-month"));
@@ -39,8 +54,6 @@ public class NewPet extends BasePage{
 		Select petTypeSelect = new Select(petTypeElement);
 		petTypeSelect.selectByVisibleText(petType);
 		petForm.addPet();
-		return new OwnerInformation(driver);
 	
 	}
-
 }
