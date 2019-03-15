@@ -93,25 +93,22 @@ public class PetClinicTest extends BaseTest {
 	}
 
 	@Test(dataProvider = "ownerAddPet")
-	public void AddPetTest(String firstName, String lastName,String petName, String petBirthDate, String petType) {
-		Home homePage = new Home((BrowserDriver)driver);
+	public void AddPetTest(String firstName, String lastName, String petName, String petBirthDate, String petType) {
+		Home homePage = new Home((BrowserDriver) driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
 		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
 		assertThat(foundOwner.getFirstName()).isEqualToIgnoringCase(firstName);
 		assertThat(foundOwner.getLastName()).isEqualToIgnoringCase(lastName);
-		Pet pet = setPetInformation(petName, petBirthDate, petType);
-		String dateParts[] = pet.getBirthDate().split("-");
-		NewPet newPetPage = ownerInfoPage.openNewPetPage();
-		ownerInfoPage = newPetPage.addNewPet(pet.getName(), dateParts[2], pet.getType());
-		Collection<List<String>> petsDetails = ownerInfoPage.readPetDetails();
-		List<String> petDetail = petsDetails.stream().filter(el -> el.contains(pet.getName())).findFirst().get();
+		String dateParts[] = petBirthDate.split("-");
+		Collection<List<String>> petsDetails = ownerInfoPage.openNewPetPage()
+				.addNewPet(petName, dateParts[2], petType).readPetDetails();
+		List<String> petDetail = petsDetails.stream().filter(el -> el.contains(petName)).findFirst().get();
 		SoftAssertions softly = new SoftAssertions();
-		softly.assertThat(petDetail.get(0)).as("Pet name").isEqualTo(pet.getName());
-		softly.assertThat(petDetail.get(1)).as("Pet birthdate").isEqualTo(pet.getBirthDate());
-		softly.assertThat(petDetail.get(2)).as("Pet type").isEqualTo(pet.getType());
+		softly.assertThat(petDetail.get(0)).as("Pet name").isEqualTo(petName);
+		softly.assertThat(petDetail.get(1)).as("Pet birthdate").isEqualTo(petBirthDate);
+		softly.assertThat(petDetail.get(2)).as("Pet type").isEqualTo(petType);
 		softly.assertAll();
 	}
-	
 
 	public static String getLocatDate(){
 		DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-d");
