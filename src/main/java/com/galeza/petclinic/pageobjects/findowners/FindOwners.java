@@ -1,6 +1,9 @@
 package com.galeza.petclinic.pageobjects.findowners;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.SearchOwner;
 import com.galeza.petclinic.pageobjects.base.BasePage;
@@ -15,6 +18,7 @@ public class FindOwners extends BasePage{
 
 	private Property property = new Property();
 	private SearchOwner search;
+	private WebElement notExistingOwnerErrorMessage;
 	
 	public FindOwners(WebDriver driver){
 		super(driver);
@@ -31,13 +35,12 @@ public class FindOwners extends BasePage{
 	
 	public OwnerInformation showSpecificOwner(String lastName){
 		search.searchSpecficOwner(lastName, driver);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		return new OwnerInformation(driver);
-
+	}
+	
+	public boolean showNonExistingOwner(String lastName){
+		search.searchSpecficOwner(lastName, driver);
+		notExistingOwnerErrorMessage = driver.findElement(By.cssSelector("span.help-inline"));
+		return notExistingOwnerErrorMessage.isDisplayed();
 	}
 }

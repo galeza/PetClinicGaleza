@@ -113,7 +113,7 @@ public class PetClinicTest extends BaseTest {
 
 	@DataProvider(name = "petNameValidation")
 
-	public static Object[][] validatePetName() {
+	public static Object[][] petNameValidation() {
 
 		return new Object[][] {
 				{ "Jeff", "Black","Lucky", getLocatDate(), 
@@ -122,7 +122,7 @@ public class PetClinicTest extends BaseTest {
 	}
 
 	@Test(dataProvider = "petNameValidation")
-	public void ValidatePetName(String firstName, String lastName, String petName, String petBirthDate,
+	public void validatePetName(String firstName, String lastName, String petName, String petBirthDate,
 			String petType) {
 		String dateParts[] = petBirthDate.split("-");
 		Home homePage = new Home((BrowserDriver) driver);
@@ -131,6 +131,24 @@ public class PetClinicTest extends BaseTest {
 				.as("validation existing pet %s name", petName).isTrue();
 
 	}
+	
+	@DataProvider(name = "unexistingOwnerValidation")
+	public static Object[][] unexistingOwnerValidation() {
+
+		return new Object[][] {
+				{"Unexisting"}, };
+
+	}
+
+	@Test(dataProvider = "unexistingOwnerValidation")
+	public void validateUnexistingOwner(String lastName) {
+		Home homePage = new Home((BrowserDriver) driver);
+		FindOwners findOwnersPage = homePage.open().goToFindOwners();
+		assertThat(findOwnersPage.showNonExistingOwner(lastName))
+				.as("validation non existing owner %s name", lastName).isTrue();
+
+	}
+	
 	
 
 	public static String getLocatDate(){
