@@ -143,6 +143,7 @@ public class PetClinicTest extends BaseTest {
 	@Test(dataProvider = "unexistingOwnerValidation")
 	public void validateUnexistingOwner(String lastName) {
 		Home homePage = new Home((BrowserDriver) driver);
+		LOG.info("LOG unexisting Owner Validation");
 		FindOwners findOwnersPage = homePage.open().goToFindOwners();
 		assertThat(findOwnersPage.showNonExistingOwner(lastName))
 				.as("validation non existing owner %s name", lastName).isTrue();
