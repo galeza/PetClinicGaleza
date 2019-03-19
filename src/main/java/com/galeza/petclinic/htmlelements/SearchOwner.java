@@ -34,12 +34,6 @@ public class SearchOwner extends HtmlElement{
 		searchOwnerNameInput.click();
 		searchOwnerNameInput.clear();
 		searchOwnerNameInput.sendKeys(lastName);
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		searchOwnerButton.click();
 	}
 }
