@@ -4,10 +4,13 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.setup.BrowserDriver;
 import com.galeza.petclinic.setup.SetupException;
 import com.galeza.petclinic.util.Screenshot;
+
+import org.apache.logging.log4j.core.config.plugins.convert.Base64Converter;
 import org.openqa.selenium.WebDriver;
 
 public class TestListener implements ITestListener{
@@ -48,12 +51,10 @@ public class TestListener implements ITestListener{
 		 try {	
 			 Class<?extends ITestResult> testClass = (Class<? extends ITestResult>) 
 					 					             result.getInstance().getClass();
-		
 			 Class<?extends ITestResult> baseTestClass = (Class<? extends ITestResult>) 
 												    testClass.getSuperclass();
-		
 			 Field driverField = baseTestClass.getDeclaredField(EnvValues.DRIVER);
-			 driver = (BrowserDriver)driverField.get(result.getInstance());	
+			 driver = (BrowserDriver)driverField.get(result.getInstance());
 			 return driver;
 		 } 
 		 catch (SecurityException | NoSuchFieldException | IllegalArgumentException	ex) {	

@@ -2,13 +2,14 @@ package com.galeza.petclinic.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-//import com.galeza.petclinic.base.BaseTest;
+import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.property.*;
 import com.galeza.petclinic.environment.*;
 
@@ -18,17 +19,19 @@ public class Screenshot {
 	private final String folderPath;
 	
 
-	
+
 	public Screenshot(WebDriver driver) throws Exception {		
 		this.driver = driver;
 		folderPath = new Property().get(EnvValues.SCREENSHOTS_FOLDER_PATH);
+		BaseTest.LOG.info("folderPath = " + folderPath);
 		validateFolderExists();				
 	}
 
 	private void validateFolderExists() {
-		File screenShotFolder = new File(folderPath);
+		File screenShotFolder = null;
+		screenShotFolder = new File(folderPath);
 		if (!screenShotFolder.exists()) {
-//			BaseTest.LOG.fatal(EnvValues.FOLDER_NOT_EXIST_ERROR);
+			BaseTest.LOG.fatal(EnvValues.FOLDER_NOT_EXIST_ERROR);
 			throw new RuntimeException(EnvValues.FOLDER_NOT_EXIST_ERROR);
 		}
 	}
@@ -41,7 +44,7 @@ public class Screenshot {
 				file.delete();
 		}
 		catch(Exception ex) {
-//			BaseTest.LOG.fatal(EnvValues.CANNOT_CLEAN_FOLDER_ERROR);
+			BaseTest.LOG.fatal(EnvValues.CANNOT_CLEAN_FOLDER_ERROR);
 			throw new RuntimeException(EnvValues.CANNOT_CLEAN_FOLDER_ERROR, ex);
 		}
 	}	
@@ -59,7 +62,7 @@ public class Screenshot {
 			 e.printStackTrace();
 		 }
 		 
-//		 BaseTest.LOG.fatal(EnvValues.CANNOT_CAPTURE_SCREENSHOT_ERROR);
+		 BaseTest.LOG.fatal(EnvValues.CANNOT_CAPTURE_SCREENSHOT_ERROR);
 		 throw new RuntimeException(EnvValues.CANNOT_CAPTURE_SCREENSHOT_ERROR);
         
     }

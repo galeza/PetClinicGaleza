@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 import javax.lang.model.element.Element;
 
-//@Listeners(TestListener.class)
+@Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
 //
 //	@DataProvider(name = "ownerInformation")
@@ -116,7 +116,7 @@ public class PetClinicTest extends BaseTest {
 	public static Object[][] petNameValidation() {
 
 		return new Object[][] {
-				{ "Jeff", "Black","Lucky", getLocatDate(), 
+				{ "Jeff", "Black","Lucky88898", getLocatDate(), 
 					PetType.getRandomPetType().toString().toLowerCase()}, };
 
 	}
@@ -126,29 +126,29 @@ public class PetClinicTest extends BaseTest {
 			String petType) {
 		String dateParts[] = petBirthDate.split("-");
 		Home homePage = new Home((BrowserDriver) driver);
-		NewPet newPetPage = homePage.open().goToFindOwners().showSpecificOwner(lastName).openNewPetPage();
+        NewPet newPetPage = homePage.open().goToFindOwners().showSpecificOwner(lastName).openNewPetPage();
 		assertThat(newPetPage.addNewPetWithExistingName(petName, dateParts[2], petType))
 				.as("validation existing pet %s name", petName).isTrue();
 
 	}
-	
-	@DataProvider(name = "unexistingOwnerValidation")
-	public static Object[][] unexistingOwnerValidation() {
-
-		return new Object[][] {
-				{"Unexisting"}, };
-
-	}
-
-	@Test(dataProvider = "unexistingOwnerValidation")
-	public void validateUnexistingOwner(String lastName) {
-		Home homePage = new Home((BrowserDriver) driver);
-		LOG.info("LOG unexisting Owner Validation");
-		FindOwners findOwnersPage = homePage.open().goToFindOwners();
-		assertThat(findOwnersPage.showNonExistingOwner(lastName))
-				.as("validation non existing owner %s name", lastName).isTrue();
-
-	}
+//	
+//	@DataProvider(name = "unexistingOwnerValidation")
+//	public static Object[][] unexistingOwnerValidation() {
+//
+//		return new Object[][] {
+//				{"Unexisting"}, };
+//
+//	}
+//
+//	@Test(dataProvider = "unexistingOwnerValidation")
+//	public void validateUnexistingOwner(String lastName) {
+//		Home homePage = new Home((BrowserDriver) driver);
+//		LOG.info("LOG unexisting Owner Validation");
+//		FindOwners findOwnersPage = homePage.open().goToFindOwners();
+//		assertThat(findOwnersPage.showNonExistingOwner(lastName))
+//				.as("validation non existing owner %s name", lastName).isTrue();
+//
+//	}
 	
 	
 
