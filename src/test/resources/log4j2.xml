@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
     <Properties>
-        <Property name="basePath">./PetClinicGaleza_Logs/logs</Property>
+        <Property name="basePath">./src/test/resources/logs</Property>
     </Properties>
     <Appenders>
-        <!-- File Appender -->
+<!--         File Appender
         <File name="FILE" fileName="${basePath}/logfile.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
-        </File>
+        </File> -->
+        <RollingFile name="ROLLBYTIME" fileName="${basePath}/logfile.${date:yyyy-MM-dd-HH.mm}.log"
+            filePattern="${basePath}/logfile.%d{yyyy-MM-dd-HH.mm}.log"
+            ignoreExceptions="false"
+            append="true">
+            <PatternLayout>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %p %m%n</Pattern>
+            </PatternLayout>
+           <TimeBasedTriggeringPolicy modulate="true" />
+        </RollingFile>
         <!-- Console Appender -->
         <Console name="STDOUT" target="SYSTEM_OUT">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
@@ -17,7 +26,7 @@
         <Logger name="com.jcg" level="debug" />
         <Root level="info">
             <AppenderRef ref="STDOUT" />
-            <AppenderRef ref="FILE" />
+            <AppenderRef ref="ROLLBYTIME" />
         </Root>
     </Loggers>
 </Configuration>

@@ -126,6 +126,7 @@ public class PetClinicTest extends BaseTest {
 			String petType) {
 		String dateParts[] = petBirthDate.split("-");
 		Home homePage = new Home((BrowserDriver) driver);
+		LOG.info("LOG SOMETHING");
         NewPet newPetPage = homePage.open().goToFindOwners().showSpecificOwner(lastName).openNewPetPage();
 		assertThat(newPetPage.addNewPetWithExistingName(petName, dateParts[2], petType))
 				.as("validation existing pet %s name", petName).isTrue();
