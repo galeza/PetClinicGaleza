@@ -6,7 +6,7 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
-import com.galeza.petclinic.base.BaseTest;
+//import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.property.*;
 import com.galeza.petclinic.environment.*;
 
@@ -54,9 +54,7 @@ public class Screenshot {
 		 try {
 			 scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 			 File targetFile = 
-			            new File(folderPath + "screenshot_"
-			                + timestamp 
-			                + "/"
+			            new File(TestsResultsFolderNameFormatter.setTestsResultsFolderPath(timestamp)
 			                + getScreenshotName(methodName));
 			 FileUtils.copyFile(scrFile, targetFile);	
 			 return;
