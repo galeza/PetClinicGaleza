@@ -116,7 +116,7 @@ public class PetClinicTest extends BaseTest {
 	public static Object[][] petNameValidation() {
 
 		return new Object[][] {
-				{ "Jeff", "Black","Lucky88898", getLocatDate(), 
+				{ "Jeff", "Black","Lucky", getLocatDate(), 
 					PetType.getRandomPetType().toString().toLowerCase()}, };
 
 	}
