@@ -8,7 +8,6 @@ import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.setup.BrowserDriver;
 import com.galeza.petclinic.setup.SetupException;
-import com.galeza.petclinic.util.Screenshot;
 
 import org.apache.logging.log4j.core.config.plugins.convert.Base64Converter;
 import org.openqa.selenium.WebDriver;

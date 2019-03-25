@@ -5,6 +5,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
 import com.galeza.petclinic.setup.BrowserDriver;
+import com.galeza.petclinic.util.DateAndTimeFormatter;
+import com.galeza.petclinic.util.TestsResultsFolderNameFormatter;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -13,7 +15,8 @@ import org.apache.logging.log4j.LogManager;
 public class BaseTest {
 
 	public WebDriver driver;
-	
+	public static String TIMESTAMP = DateAndTimeFormatter.getLocalDate();
+	public static String RESULTS_FOLDER_PATH = TestsResultsFolderNameFormatter.setTestsResultsFolderPath(TIMESTAMP); 
 	public static Logger LOG = LogManager.getLogger(BaseTest.class);
 
 	

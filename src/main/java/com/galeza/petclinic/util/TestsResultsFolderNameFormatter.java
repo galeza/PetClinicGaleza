@@ -10,7 +10,7 @@ public class TestsResultsFolderNameFormatter {
 		  }
 	  
     public static String setTestsResultsFolderPath(String timestamp) {
-    	String folderPath = new Property().get(EnvValues.SCREENSHOTS_FOLDER_PATH);
+    	String folderPath = new Property().get(EnvValues.RESULTS_FOLDER_PATH);
         String testResultsFolderPath = folderPath + "result_"
                 + timestamp 
                 + "/";
