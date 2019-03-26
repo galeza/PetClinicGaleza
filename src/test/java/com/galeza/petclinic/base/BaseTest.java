@@ -9,6 +9,12 @@ import com.galeza.petclinic.util.DateAndTimeFormatter;
 import com.galeza.petclinic.util.TestsResultsFolderNameFormatter;
 
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.core.LoggerContext;
+import org.apache.logging.log4j.core.config.Configuration;
+import org.apache.logging.log4j.core.config.LoggerConfig;
+
+import java.io.File;
+
 import org.apache.logging.log4j.LogManager;
 
 
@@ -21,7 +27,12 @@ public class BaseTest {
 
 	
 	@BeforeMethod
-	public void setUp() {			
+	public void setUp() {	
+		System.setProperty("resultsPath", RESULTS_FOLDER_PATH);
+		LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
+        ctx.reconfigure();
+		File dir = new File(RESULTS_FOLDER_PATH);
+		dir.mkdirs();
 		driver = new BrowserDriver("chrome"); 	
 		driver.manage().window().maximize(); 
 	}   

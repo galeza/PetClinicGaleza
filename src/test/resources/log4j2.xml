@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration xmlns="http://logging.apache.org/log4j/2.0/config">
-    <Properties>
+<!--     <Properties>
         <Property name="basePath">./src/test/resources/logs</Property>
-    </Properties>
+    </Properties> -->
     <Appenders>
 <!--         File Appender
         <File name="FILE" fileName="${basePath}/logfile.log" append="true">
             <PatternLayout pattern="%-5p | %d{yyyy-MM-dd HH:mm:ss} | [%t] %C{2} (%F:%L) - %m%n" />
         </File> -->
-        <RollingFile name="ROLLBYTIME" fileName="${basePath}/logfile.${date:yyyy-MM-dd-HH.mm}.log"
+        <RollingFile name="ROLLBYTIME" fileName="${sys:resultsPath}/logfile.${date:yyyy-MM-dd-HH.mm}.log"
             filePattern="${basePath}/logfile.%d{yyyy-MM-dd-HH.mm}.log"
             ignoreExceptions="false"
             append="true">
