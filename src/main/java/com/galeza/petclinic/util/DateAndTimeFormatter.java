@@ -11,7 +11,7 @@ public class DateAndTimeFormatter {
 	  
 	public static String getLocalDate() {
 		LocalDateTime now = LocalDateTime.now();
-		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd_HH:mm:ss");
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
 		return now.format(dateTimeFormatter);
 	}
 }
