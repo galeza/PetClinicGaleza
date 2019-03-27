@@ -23,12 +23,13 @@ public class BaseTest {
 	public WebDriver driver;
 	public static String TIMESTAMP = DateAndTimeFormatter.getLocalDate();
 	public static String RESULTS_FOLDER_PATH = TestsResultsFolderNameFormatter.setTestsResultsFolderPath(TIMESTAMP); 
-	public static Logger LOG = LogManager.getLogger(BaseTest.class);
+	public static Logger LOG;
 
 	
 	@BeforeMethod
 	public void setUp() {	
 		System.setProperty("resultsPath", RESULTS_FOLDER_PATH);
+		LOG = LogManager.getLogger(BaseTest.class);
 		LoggerContext ctx = (LoggerContext) LogManager.getContext(false);
         ctx.reconfigure();
 		File dir = new File(RESULTS_FOLDER_PATH);
