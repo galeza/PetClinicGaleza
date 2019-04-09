@@ -41,6 +41,9 @@ Thumbs.db
 /build
 */build
 
+#Project directories #
+results/
+
 # Eclipse specific files/directories #
 ######################################
 .classpath
