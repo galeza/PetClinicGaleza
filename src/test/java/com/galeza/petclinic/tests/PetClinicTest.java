@@ -1,7 +1,6 @@
 package com.galeza.petclinic.tests;
 
 import org.assertj.core.api.SoftAssertions;
-import org.omg.CORBA.PERSIST_STORE;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -14,21 +13,13 @@ import com.galeza.petclinic.pageobjects.home.Home;
 import com.galeza.petclinic.pageobjects.newowner.NewOwner;
 import com.galeza.petclinic.pageobjects.newpet.NewPet;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
-import com.galeza.petclinic.pageobjects.owners.Owners;
 import com.galeza.petclinic.pojo.Owner;
-import com.galeza.petclinic.pojo.Pet;
 import com.galeza.petclinic.setup.BrowserDriver;
-
 import static org.assertj.core.api.Assertions.*;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
-
-import javax.lang.model.element.Element;
 
 @Listeners(TestListener.class)
 public class PetClinicTest extends BaseTest {
@@ -45,6 +36,7 @@ public class PetClinicTest extends BaseTest {
 	@Test(dataProvider = "ownerInformation")
 	public void modifyOwnerTest(String firstName, String lastName, String modifiedFirstName, String modifiedLastName,
 			String address, String city, String telephone) {
+		LOG.info("Start modifyOwnerTest");
 		Home homePage = new Home(driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showAllOwners()
 				.goToOwner(firstName + " " + lastName);
@@ -70,6 +62,7 @@ public class PetClinicTest extends BaseTest {
 	@Test(dataProvider = "findSpecificOwner")
 	public void showSpecificOwnerTest(String firstName, String lastName, String address, String city,
 			String telephone) {
+		LOG.info("Start showSpecificOwnerTest");
 		Home homePage = new Home(driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
 		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
@@ -91,6 +84,7 @@ public class PetClinicTest extends BaseTest {
 
 	@Test(dataProvider = "ownerAddPet")
 	public void addPetTest(String firstName, String lastName, String petName, String petBirthDate, String petType) {
+		LOG.info("Start addPetTest");
 		Home homePage = new Home((BrowserDriver) driver);
 		OwnerInformation ownerInfoPage = homePage.open().goToFindOwners().showSpecificOwner(lastName);
 		Owner foundOwner = ownerInfoPage.readInformationAboutOwner();
@@ -119,6 +113,7 @@ public class PetClinicTest extends BaseTest {
 	@Test(dataProvider = "petNameValidation")
 	public void validatePetName(String firstName, String lastName, String petName, String petBirthDate,
 			String petType) {
+		LOG.info("Start validatePetName");
 		String dateParts[] = petBirthDate.split("-");
 		Home homePage = new Home((BrowserDriver) driver);
 		LOG.info("LOG SOMETHING");
@@ -137,8 +132,8 @@ public class PetClinicTest extends BaseTest {
 
 	@Test(dataProvider = "unexistingOwnerValidation")
 	public void validateUnexistingOwner(String lastName) {
+		LOG.info("Start validateUnexistingOwner");
 		Home homePage = new Home((BrowserDriver) driver);
-		LOG.info("LOG unexisting Owner Validation");
 		FindOwners findOwnersPage = homePage.open().goToFindOwners();
 		assertThat(findOwnersPage.showNonExistingOwner(lastName)).as("validation non existing owner %s name", lastName)
 				.isTrue();
@@ -151,14 +146,14 @@ public class PetClinicTest extends BaseTest {
 		return dtf.format(localDate);
 	}
 
-	private Pet setPetInformation(String name, String birthdate, String type) {
-		Pet pet = new Pet();
-		pet.setName(name);
-		pet.setBirthDate(birthdate);
-		pet.setType(type);
-		return pet;
-
-	}
+//	private Pet setPetInformation(String name, String birthdate, String type) {
+//		Pet pet = new Pet();
+//		pet.setName(name);
+//		pet.setBirthDate(birthdate);
+//		pet.setType(type);
+//		return pet;
+//
+//	}
 
 	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,
 			String telephone) {
