@@ -25,7 +25,7 @@ public class PetForm extends HtmlElement {
 	private Select typeSelect;
 
 	@Name("PET Type")
-	@FindBy(css = "div[class='form-actions'] button[type='submit']")
+	@FindBy(css = "div.form-actions button")
 	private Button addPetButton;
 	
 	public void enterName(String name){
