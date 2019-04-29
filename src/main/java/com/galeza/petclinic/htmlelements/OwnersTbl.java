@@ -4,12 +4,8 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import com.galeza.petclinic.environment.EnvValues;
-
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 
 @Name("OWNERS TABLE")
 @FindBy(css = "table[class='table table-striped']")

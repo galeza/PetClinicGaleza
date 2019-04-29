@@ -116,7 +116,6 @@ public class PetClinicTest extends BaseTest {
 		LOG.info("Start validatePetName");
 		String dateParts[] = petBirthDate.split("-");
 		Home homePage = new Home((BrowserDriver) driver);
-		LOG.info("LOG SOMETHING");
 		NewPet newPetPage = homePage.open().goToFindOwners().showSpecificOwner(lastName).openNewPetPage();
 		assertThat(newPetPage.addNewPetWithExistingName(petName, dateParts[2].replaceFirst("^0*", ""), petType))
 				.as("validation existing pet %s name", petName).isTrue();
@@ -146,14 +145,6 @@ public class PetClinicTest extends BaseTest {
 		return dtf.format(localDate);
 	}
 
-//	private Pet setPetInformation(String name, String birthdate, String type) {
-//		Pet pet = new Pet();
-//		pet.setName(name);
-//		pet.setBirthDate(birthdate);
-//		pet.setType(type);
-//		return pet;
-//
-//	}
 
 	private Owner setOwnerInformation(String firstName, String lastName, String address, String city,
 			String telephone) {

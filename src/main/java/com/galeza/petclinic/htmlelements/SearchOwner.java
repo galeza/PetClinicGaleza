@@ -25,12 +25,6 @@ public class SearchOwner extends HtmlElement{
 	}
 	
 	public void searchSpecficOwner(String lastName, WebDriver driver){
-//		System.out.println(" last name = " + lastName);
-//		Actions actions = new Actions(driver);
-//		actions.moveToElement(searchOwnerNameInput).click();
-//		//actions.click();
-//		actions.sendKeys(lastName).perform();;
-//		//actions.build().perform();
 		searchOwnerNameInput.click();
 		searchOwnerNameInput.clear();
 		searchOwnerNameInput.sendKeys(lastName);

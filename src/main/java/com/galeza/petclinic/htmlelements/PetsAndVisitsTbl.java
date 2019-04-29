@@ -1,12 +1,8 @@
 package com.galeza.petclinic.htmlelements;
 
-import java.util.List;
-
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Name;
 import ru.yandex.qatools.htmlelements.element.HtmlElement;
-import ru.yandex.qatools.htmlelements.element.Table;
 
 @Name("PETS AND VISITS")
 @FindBy(xpath = "//body/div/table[2]")
