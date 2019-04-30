@@ -12,12 +12,10 @@ import org.openqa.selenium.WebElement;
 
 import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.OwnerTbl;
-import com.galeza.petclinic.htmlelements.PetsAndVisitsTbl;
 import com.galeza.petclinic.pageobjects.base.BasePage;
 import com.galeza.petclinic.pageobjects.newowner.NewOwner;
 import com.galeza.petclinic.pageobjects.newpet.NewPet;
 import com.galeza.petclinic.pojo.Owner;
-import com.galeza.petclinic.pojo.Pet;
 import com.galeza.petclinic.setup.BrowserDriver;
 
 import ru.yandex.qatools.htmlelements.element.Table;
@@ -27,7 +25,6 @@ import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 public class OwnerInformation extends BasePage{
 
 	private OwnerTbl ownertbl;
-	private PetsAndVisitsTbl petsAndVisitsTbl;
 
 	
 	public OwnerInformation(WebDriver driver) {

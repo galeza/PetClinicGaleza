@@ -9,8 +9,6 @@ import com.galeza.petclinic.environment.EnvValues;
 import com.galeza.petclinic.htmlelements.PetForm;
 import com.galeza.petclinic.pageobjects.base.BasePage;
 import com.galeza.petclinic.pageobjects.ownerinformation.OwnerInformation;
-import com.galeza.petclinic.setup.BrowserDriver;
-
 import ru.yandex.qatools.htmlelements.exceptions.HtmlElementsException;
 import ru.yandex.qatools.htmlelements.loader.HtmlElementLoader;
 
@@ -53,7 +51,10 @@ public class NewPet extends BasePage{
 		WebElement petTypeElement = driver.findElement(By.id("type"));
 		Select petTypeSelect = new Select(petTypeElement);
 		petTypeSelect.selectByVisibleText(petType);
-		petForm.addPet();
+		//flacky test -> must find element once more
+		WebElement addPetButton = driver.findClickableElement(By.cssSelector("div[class='form-actions'] button[type='submit']"));
+		addPetButton.click();
+		//petForm.addPet();
 	
 	}
 }

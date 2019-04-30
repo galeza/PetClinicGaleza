@@ -6,8 +6,6 @@ import static org.openqa.selenium.support.ui.ExpectedConditions.textToBePresentI
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
-import java.io.File;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 
@@ -19,14 +17,10 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 //import com.galeza.petclinic.base.BaseTest;
 import com.galeza.petclinic.environment.EnvValues;
-import com.galeza.petclinic.property.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class BrowserDriver implements SetupDriverInterface{
@@ -231,7 +225,6 @@ public class BrowserDriver implements SetupDriverInterface{
 		}
 		catch (Exception ex) {
 			//TODO
-			System.out.println("jsException");
 			//log.fatal(ex.getMessage());		
 		}
 		
